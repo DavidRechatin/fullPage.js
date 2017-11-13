@@ -1398,6 +1398,13 @@
                 localIsResizing: isResizing
             };
 
+
+            var slides = element.find(SLIDES_WRAPPER_SEL);
+            var destiny =  slides.find(SLIDE_SEL).first();
+            //setScrollingSpeed (0, 'internal');
+            landscapeScroll(slides, destiny);
+            //setScrollingSpeed (originals.scrollingSpeed, 'internal');
+
             //quiting when destination scroll is the same as the current one
             if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
 
