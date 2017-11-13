@@ -1054,6 +1054,26 @@
 
             var scrollSection = (type === 'down') ? moveSectionDown : moveSectionUp;
 
+            var nb_slides = $(SECTION_ACTIVE_SEL).find(SLIDE_SEL).length;
+            var slide_active = $(SECTION_ACTIVE_SEL).find(SLIDE_ACTIVE_SEL);
+            var slide_index = $(slide_active).index();
+
+            if (nb_slides > 1) {
+                if (type === 'down') {
+                    if (slide_index != 0 && slide_index != nb_slides - 1) {
+                        scrollSection = moveSlideRight;
+                    } else {
+                        scrollSection = moveSectionDown;
+                    }
+                } else {
+                    if (slide_index != 0) {
+                        scrollSection = moveSlideLeft
+                    } else {
+                        scrollSection = moveSectionUp;
+                    }
+                }
+            }
+
             if(options.scrollOverflow){
                 var scrollable = options.scrollOverflowHandler.scrollable($(SECTION_ACTIVE_SEL));
                 var check = (type === 'down') ? 'bottom' : 'top';
