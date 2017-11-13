@@ -2481,6 +2481,9 @@ if ( typeof module != 'undefined' && module.exports ) {
                         }else{
                             element.wrapInner(wrap);
                         }
+
+                        element.find(".fp-scroller").append('<div class="arrow_down"></div>');
+
                         scrollOverflowHandler.create(element, scrollHeight, self.iscrollOptions);
                     }
                 }
