@@ -1057,7 +1057,6 @@
             var nb_slides = $(SECTION_ACTIVE_SEL).find(SLIDE_SEL).length;
             var slide_active = $(SECTION_ACTIVE_SEL).find(SLIDE_ACTIVE_SEL);
             var slide_index = $(slide_active).index();
-
             if (nb_slides > 1) {
                 if (type === 'down') {
                     if (slide_index != 0 && slide_index != nb_slides - 1) {
@@ -1074,6 +1073,7 @@
                 }
             }
 
+
             if(options.scrollOverflow){
                 var scrollable = options.scrollOverflowHandler.scrollable($(SECTION_ACTIVE_SEL));
                 var check = (type === 'down') ? 'bottom' : 'top';
@@ -1081,7 +1081,11 @@
                 if(scrollable.length > 0 ){
                     //is the scrollbar at the start/end of the scroll?
                     if(options.scrollOverflowHandler.isScrolled(check, scrollable)){
-                        scrollSection();
+                        if (slide_index == -1 || slide_index == 0) {
+                            scrollSection();
+                        } else {
+                            return true;
+                        }
                     }else{
                         return true;
                     }
@@ -1398,12 +1402,13 @@
                 localIsResizing: isResizing
             };
 
-
             var slides = element.find(SLIDES_WRAPPER_SEL);
-            var destiny =  slides.find(SLIDE_SEL).first();
-            //setScrollingSpeed (0, 'internal');
-            landscapeScroll(slides, destiny);
-            //setScrollingSpeed (originals.scrollingSpeed, 'internal');
+            if (slides.find(SLIDE_SEL).length > 1) {
+                var destiny = slides.find(SLIDE_SEL).first();
+                //setScrollingSpeed (0, 'internal');
+                landscapeScroll(slides, destiny);
+                //setScrollingSpeed (originals.scrollingSpeed, 'internal');
+            }
 
             //quiting when destination scroll is the same as the current one
             if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
