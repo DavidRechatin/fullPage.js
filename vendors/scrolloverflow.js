@@ -2481,7 +2481,7 @@ if ( typeof module != 'undefined' && module.exports ) {
                         }else{
                             element.wrapInner(wrap);
                         }
-
+                        element.find(TABLE_CELL_SEL).addClass("fp-scroll");
                         element.find(".fp-scroller").append('<div class="arrow_down"></div>');
 
                         scrollOverflowHandler.create(element, scrollHeight, self.iscrollOptions);
