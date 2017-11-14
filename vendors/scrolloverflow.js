@@ -931,6 +931,18 @@ IScroll.prototype = {
         }
     }
 
+    $(this.wrapper).find(".scroll-animate").each(function (i, el) {
+        var el = $(el);
+        var et = el.offset().top + el[0].offsetHeight - 10;
+        var vt = $(window).height();
+
+        if (et <= vt) {
+            el.addClass("scroll-animate-in");
+        } else {
+            el.removeClass("scroll-animate-in");
+        }
+    });
+
 
 // INSERT POINT: _translate
 
@@ -2482,7 +2494,9 @@ if ( typeof module != 'undefined' && module.exports ) {
                             element.wrapInner(wrap);
                         }
                         element.find(TABLE_CELL_SEL).addClass("fp-scroll");
-                        element.find(".fp-scroller").append('<div class="arrow_down"></div>');
+                        if (!element.hasClass("portfolio")) {
+                            element.find(".fp-scroller").append('<div class="arrow_down scroll-animate"></div>');
+                        }
 
                         scrollOverflowHandler.create(element, scrollHeight, self.iscrollOptions);
                     }
