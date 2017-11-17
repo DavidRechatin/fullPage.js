@@ -5,6 +5,7 @@
  *
  * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
  */
+
 (function(global, factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
@@ -1054,6 +1055,7 @@
 
             var scrollSection = (type === 'down') ? moveSectionDown : moveSectionUp;
 
+            // bof modifié par David nov. 2017
             var nb_slides = $(SECTION_ACTIVE_SEL).find(SLIDE_SEL).length;
             var slide_active = $(SECTION_ACTIVE_SEL).find(SLIDE_ACTIVE_SEL);
             var slide_index = $(slide_active).index();
@@ -1072,20 +1074,24 @@
                     }
                 }
             }
+            // eof modifié par David nov. 2017
 
 
             if(options.scrollOverflow){
                 var scrollable = options.scrollOverflowHandler.scrollable($(SECTION_ACTIVE_SEL));
                 var check = (type === 'down') ? 'bottom' : 'top';
 
+
                 if(scrollable.length > 0 ){
                     //is the scrollbar at the start/end of the scroll?
                     if(options.scrollOverflowHandler.isScrolled(check, scrollable)){
+                        // modifié par David nov. 2017
                         if (slide_index == -1 || slide_index == 0) {
                             scrollSection();
                         } else {
                             return true;
                         }
+                        // eof modifié par David nov. 2017
                     }else{
                         return true;
                     }
@@ -1402,6 +1408,7 @@
                 localIsResizing: isResizing
             };
 
+            // bof ajouté par David nov. 2017
             var slides = element.find(SLIDES_WRAPPER_SEL);
             if (slides.find(SLIDE_SEL).length > 1) {
                 var destiny = slides.find(SLIDE_SEL).first();
@@ -1409,6 +1416,7 @@
                 landscapeScroll(slides, destiny);
                 //setScrollingSpeed (originals.scrollingSpeed, 'internal');
             }
+            // eof ajouté par David nov. 2017
 
             //quiting when destination scroll is the same as the current one
             if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }

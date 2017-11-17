@@ -931,17 +931,18 @@ IScroll.prototype = {
         }
     }
 
+    // bof ajouté par David nov. 2017
     $(this.wrapper).find(".scroll-animate").each(function (i, el) {
         var el = $(el);
         var et = el.offset().top + el[0].offsetHeight - 10;
         var vt = $(window).height();
-
         if (et <= vt) {
             el.addClass("scroll-animate-in");
         } else {
             el.removeClass("scroll-animate-in");
         }
     });
+    // eof ajouté par David nov. 2017
 
 
 // INSERT POINT: _translate
@@ -2493,10 +2494,13 @@ if ( typeof module != 'undefined' && module.exports ) {
                         }else{
                             element.wrapInner(wrap);
                         }
+
+                        // bof ajouté par David nov. 2017
                         element.find(TABLE_CELL_SEL).addClass("fp-scroll");
                         if (!element.hasClass("portfolio")) {
                             element.find(".fp-scroller").append('<div class="arrow_down scroll-animate"></div>');
                         }
+                        // eof ajouté par David nov. 2017
 
                         scrollOverflowHandler.create(element, scrollHeight, self.iscrollOptions);
                     }
@@ -2749,3 +2753,4 @@ if ( typeof module != 'undefined' && module.exports ) {
         };
     })();
 })(window, jQuery);
+
